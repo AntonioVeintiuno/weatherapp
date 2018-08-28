@@ -6,10 +6,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        Weater app(aplicacion de clima)
         {/*here we can see that a component can be called a component in two different ways*/}
         <WeatherLocation/>
-        <WeatherLocation></WeatherLocation>
       </div>
     );
   }

@@ -22,11 +22,11 @@ const icons = {
 
 const getWeatherIcon = (weatherState) => {
   const icon = icons[weatherState];
-  const sizeIcon = "4x";
+  // const sizeIcon = "4x";
   if (icon) {
-    return  <WeatherIcons className="wicon" name={icon} size="2x" />
+    return  <WeatherIcons className="wicon" name={icon} size="4x" />
   } else {
-    return  <WeatherIcons className="wicon" name="day-sunny" size="2x" />
+    return  <WeatherIcons className="wicon" name="day-sunny" size="4x" />
   }
 }
 

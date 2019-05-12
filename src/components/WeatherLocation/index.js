@@ -34,8 +34,12 @@ class WeatherLocation extends Component {
   }
 
   handleUpdateClick = () => {
-    fetch(api_weather);
-    console.log('actualizar')
+    // this function is an example to a function with two promises
+    fetch(api_weather).then( response => {
+      return response.json()
+    }).then( data =>{
+      console.log('data', data)
+    });
     this.setState({city: "Monterrey", data: data2})
   }
 

@@ -17,13 +17,6 @@ const data = {
   wind: '10 m/s',
 }
 
-const data2 = {
-  temperature: 7,
-  weatherState: WINDY,
-  humidity: 15,
-  wind: '10 m/s',
-}
-
 class WeatherLocation extends Component {
   constructor () {
     super();
@@ -33,14 +26,34 @@ class WeatherLocation extends Component {
     }
   }
 
+  getWeatherState = weather_data => {
+    return SUN;
+  }
+
+  getData = (weather_data) => {
+    const { humidity, temp } = weather_data.main;
+    const { speed } = weather_data.wind;
+    const weatherState = this.getWeatherState(weather_data);
+
+    const data = {
+      humidity,
+      temperature: temp,
+      weatherState,
+      wind: `${speed} m/s`
+    }
+    return data;
+  }
+
   handleUpdateClick = () => {
     // this function is an example to a function with two promises
     fetch(api_weather).then( response => {
       return response.json()
     }).then( data =>{
-      console.log('data', data)
+      const newWeaher = this.getData(data);
+      this.setState({
+        data: newWeaher
+      });
     });
-    this.setState({city: "Monterrey", data: data2})
   }
 
   render() {

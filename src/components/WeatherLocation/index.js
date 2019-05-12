@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import './styles.css';
-import { SUN, WINDY } from './../../constants/weathers';
+import convert from 'convert-units'
+import { SUN } from './../../constants/weathers';
 
 const location = "Mexico,mx";
 const api_key = "9093edda048fb38f39b3a91bd9d9e8a4";
 const url_base_weather = "http://api.openweathermap.org/data/2.5/weather"
 
-const api_weather = `${url_base_weather}?q=${location}&appid=${api_key}&units=metric`;
+const api_weather = `${url_base_weather}?q=${location}&appid=${api_key}`;
 
 const data = {
   temperature: 7,
@@ -26,6 +27,10 @@ class WeatherLocation extends Component {
     }
   }
 
+  getTemp = kelvin => {
+    return Number(convert(kelvin).from("K").to("C").toFixed(2));
+  }
+
   getWeatherState = weather_data => {
     return SUN;
   }
@@ -34,10 +39,11 @@ class WeatherLocation extends Component {
     const { humidity, temp } = weather_data.main;
     const { speed } = weather_data.wind;
     const weatherState = this.getWeatherState(weather_data);
+    const temperature = this.getTemp(temp);
 
     const data = {
       humidity,
-      temperature: temp,
+      temperature,
       weatherState,
       wind: `${speed} m/s`
     }

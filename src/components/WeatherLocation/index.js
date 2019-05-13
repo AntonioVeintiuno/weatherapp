@@ -22,6 +22,24 @@ class WeatherLocation extends Component {
     }
   }
 
+  componentDidMount(){
+    console.log('componentDidMount')
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate')
+  }
+
+  componentWillMount(){
+    console.log('componentWillMount')
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('componentWillUpdate')
+  }
+
+
+
   handleUpdateClick = () => {
     // this function is an example to a function with two promises
     fetch(api_weather).then( response => {

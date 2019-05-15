@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         {/*here we can see that a component can be called a component in two different ways*/}
-        <WeatherLocation/>
+        <WeatherLocation city="Mexico,mx"/>
       </div>
     );
   }

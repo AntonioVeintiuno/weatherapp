@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { PropTypes } from 'prop-types';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import './styles.css';
 import transformWeather from './../../services/transformWeather';
-import { api_weather } from "./../../constants/api_url";
+import getUrlWeatherByCity from '../../services/getUrlWeatherByCity';
 
 class WeatherLocation extends Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
+    const { city } = props;
     this.state = {
-      city: 'México',
+      city,
       data: null
     }
   }
@@ -35,6 +37,7 @@ class WeatherLocation extends Component {
 
   handleUpdateClick = () => {
     // this function is an example to a function with two promises
+    const api_weather = getUrlWeatherByCity(this.state.city);
     fetch(api_weather).then( response => {
       return response.json()
     }).then( data =>{
@@ -58,5 +61,7 @@ class WeatherLocation extends Component {
     )
   }
 }
-
+WeatherLocation.propTypes = {
+  city: PropTypes.string.isRequired,
+}
 export default WeatherLocation;

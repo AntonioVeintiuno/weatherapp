@@ -21,20 +21,6 @@ class WeatherLocation extends Component {
     this.handleUpdateClick();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate')
-  }
-
-  componentWillMount(){
-    console.log('componentWillMount')
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log('componentWillUpdate')
-  }
-
-
-
   handleUpdateClick = () => {
     // this function is an example to a function with two promises
     const api_weather = getUrlWeatherByCity(this.state.city);
@@ -49,9 +35,10 @@ class WeatherLocation extends Component {
   }
 
   render() {
+    const { onWeatherLocationClick } = this.props;
     const { city, data} = this.state;
     return (
-      <div className="weatherLocationCont">
+      <div className="weatherLocationCont" onClick={onWeatherLocationClick}>
         <Location city={city}></Location>
         { data ?
           <WeatherData data={data}/> :
@@ -63,5 +50,6 @@ class WeatherLocation extends Component {
 }
 WeatherLocation.propTypes = {
   city: PropTypes.string.isRequired,
+  onWeatherLocationClick: PropTypes.func,
 }
 export default WeatherLocation;
